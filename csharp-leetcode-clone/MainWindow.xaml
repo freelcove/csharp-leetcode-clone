@@ -1,0 +1,53 @@
+﻿<Window x:Class="CSharpCamp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+        xmlns:local="clr-namespace:CSharpCamp"
+        mc:Ignorable="d"
+        Title="C# Leetcode Clone" Height="600" Width="800">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- First Row -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Problem Selection & Instruction -->
+            <StackPanel Grid.Column="0" Margin="10">
+                <ComboBox x:Name="ProblemSelector" SelectedIndex="0" SelectionChanged="ProblemSelector_SelectionChanged" FontSize="15"/>
+                <RichTextBox x:Name="ProblemDescription" Grid.Row="1" Margin="10" IsReadOnly="True">
+                    <FlowDocument  FontSize="15"  />
+                </RichTextBox>
+            </StackPanel>
+
+            <!-- Code Editor -->
+            <avalonEdit:TextEditor x:Name="CodeEditor" Grid.Column="1" Margin="10" ShowLineNumbers="True" SyntaxHighlighting="C#" FontFamily="Consolas" FontSize="15"/>
+        </Grid>
+
+        <!-- Second Row -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10" Width="552">
+            <TextBox x:Name="TestInput" Width="200" Margin="10" Padding="5" FontSize="15"
+         Text="Enter input here..."
+         Foreground="Gray"
+         GotFocus="TestInput_GotFocus"
+         LostFocus="TestInput_LostFocus"/>
+            <Button x:Name="TestButton" Content="Test Code" Margin="10" Padding="5" Click="TestButton_Click" FontSize="15"/>
+            <Button x:Name="RunButton" Content="Submit" Margin="10" Padding="5" Click="RunButton_Click" FontSize="15"/>
+            <Button x:Name="HelpButton" Content="Help" Margin="10" Padding="5" Click="HelpButton_Click" FontSize="15" />
+            <Button x:Name="SolutionButton" Content="Solution" Margin="10" Padding="5" Click="SolutionButton_Click" FontSize="15" />
+        </StackPanel>
+
+        <!-- Third Row -->
+
+    </Grid>
+</Window>
