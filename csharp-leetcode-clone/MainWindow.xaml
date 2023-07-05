@@ -6,7 +6,7 @@
         xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
         xmlns:local="clr-namespace:CSharpCamp"
         mc:Ignorable="d"
-        Title="C# Leetcode Clone" Height="600" Width="800">
+        Title="C# Leetcode Clone" Height="900" Width="1200">
 
 
     <Grid>
@@ -41,7 +41,7 @@
          Foreground="Gray"
          GotFocus="TestInput_GotFocus"
          LostFocus="TestInput_LostFocus"/>
-            <Button x:Name="TestButton" Content="Test Code" Margin="10" Padding="5" Click="TestButton_Click" FontSize="15"/>
+            <Button x:Name="TestButton" Content="Test" Margin="10" Padding="5" Click="TestButton_Click" FontSize="15"/>
             <Button x:Name="RunButton" Content="Submit" Margin="10" Padding="5" Click="RunButton_Click" FontSize="15"/>
             <Button x:Name="HelpButton" Content="Help" Margin="10" Padding="5" Click="HelpButton_Click" FontSize="15" />
             <Button x:Name="SolutionButton" Content="Solution" Margin="10" Padding="5" Click="SolutionButton_Click" FontSize="15" />

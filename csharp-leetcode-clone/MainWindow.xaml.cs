@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
+﻿using CSharpCamp;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace CSharpCamp
             LoadProblems();
             ProblemSelector.ItemsSource = _problems;
             ProblemSelector.DisplayMemberPath = "Title";
-            CodeEditor.Text =@"
+            CodeEditor.Text = @"
 // Your code here 
 var data = Input.Split(',');
 
@@ -167,8 +168,108 @@ return answer;";
             gcd.TestCases.Add(new TestCase { Input = "20,8", ExpectedOutput = "4" });
             _problems.Add(gcd);
 
-            // Problem 9
 
+            // Problem 9
+            var factors = new Problem
+            {
+                Title = "9. Find All Factors",
+                Description = "Find all factors of a number.",
+                RequiredInputs = 1,
+                ExampleSolution = "var number = int.Parse(Input);\nvar result = \"\";\nfor (var i = 1; i <= number; i++)\n{\n    if (number % i == 0) result += i.ToString() + \",\";\n}\nreturn result.TrimEnd(',');\n"
+            };
+            factors.Examples.Add("Input: 12\nOutput: 1,2,3,4,6,12");
+            factors.TestCases.Add(new TestCase { Input = "12", ExpectedOutput = "1,2,3,4,6,12" });
+            factors.TestCases.Add(new TestCase { Input = "18", ExpectedOutput = "1,2,3,6,9,18" });
+            factors.TestCases.Add(new TestCase { Input = "24", ExpectedOutput = "1,2,3,4,6,8,12,24" });
+            factors.TestCases.Add(new TestCase { Input = "30", ExpectedOutput = "1,2,3,5,6,10,15,30" });
+            _problems.Add(factors);
+
+            // Problem 10
+            var multiplicationTable = new Problem
+            {
+                Title = "10. Generate Multiplication Table",
+                Description = "Generate a multiplication table for a given number.",
+                RequiredInputs = 1,
+                ExampleSolution = "var number = int.Parse(Input);\nvar result = \"\";\nfor (var i = 1; i <= 10; i++)\n{\n    result += (number * i).ToString() + \",\";\n}\nreturn result.TrimEnd(',');\n"
+            };
+            multiplicationTable.Examples.Add("Input: 5\nOutput: 5,10,15,20,25,30,35,40,45,50");
+            multiplicationTable.TestCases.Add(new TestCase { Input = "5", ExpectedOutput = "5,10,15,20,25,30,35,40,45,50" });
+            multiplicationTable.TestCases.Add(new TestCase { Input = "10", ExpectedOutput = "10,20,30,40,50,60,70,80,90,100" });
+            multiplicationTable.TestCases.Add(new TestCase { Input = "2", ExpectedOutput = "2,4,6,8,10,12,14,16,18,20" });
+            multiplicationTable.TestCases.Add(new TestCase { Input = "7", ExpectedOutput = "7,14,21,28,35,42,49,56,63,70" });
+            _problems.Add(multiplicationTable);
+
+            // Problem 11
+            var sorting = new Problem
+            {
+                Title = "11. Sorting",
+                Description = "Implement a sorting algorithm. You need to sort a list of five integers in ascending order. The input will be a string of comma-separated five integers and the output should be a string of comma-separated five integers in sorted order.",
+                RequiredInputs = 5,
+                ExampleSolution = @"
+string[] numbersStr = Input.Split(',');
+int[] numbers = new int[numbersStr.Length];
+for (int i = 0; i < numbersStr.Length; i++)
+{
+    numbers[i] = int.Parse(numbersStr[i]);
+}
+for (int i = 0; i < numbers.Length - 1; i++)
+{
+    for (int j = i + 1; j < numbers.Length; j++)
+    {
+        if (numbers[i] > numbers[j])
+        {
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+        }
+    }
+}
+return string.Join(',', numbers);",
+            };
+            sorting.Examples.Add("Input: \"3,2,1,4,5\"\nOutput: \"1,2,3,4,5\"");
+            sorting.TestCases.Add(new TestCase { Input = "3,2,1,9,7", ExpectedOutput = "1,2,3,7,9" });
+            sorting.TestCases.Add(new TestCase { Input = "-5,-4,8,-2,-1", ExpectedOutput = "-5,-4,-2,-1,8" });
+            sorting.TestCases.Add(new TestCase { Input = "10,20,30,40,-100", ExpectedOutput = "-100,10,20,30,40" });
+            sorting.TestCases.Add(new TestCase { Input = "2,3,4,5,-1", ExpectedOutput = "-1,2,3,4,5" });
+            _problems.Add(sorting);
+
+            // Problem 12
+            var lookAndSay = new Problem
+            {
+                Title = "12. Look and Say Sequence",
+                Description = "Generate the nth term in the look-and-say sequence. The look-and-say sequence is a sequence of digits that is constructed by describing the previous term in the sequence. Starting with \"1\", the second term is \"11\" because the first term contains one \"1\".",
+                RequiredInputs = 1,
+                ExampleSolution = @"
+if (int.Parse(Input) == 1) return ""1"";
+string result = ""1"";
+for (int i = 2; i <= int.Parse(Input); i++)
+        {
+            string temp = """";
+    for (int j = 0; j < result.Length; j++)
+            {
+                int count = 1;
+                while (j + 1 < result.Length && result[j] == result[j + 1])
+                {
+                    j++;
+                    count++;
+                }
+                temp += count.ToString() + result[j];
+            }
+            result = temp;
+        }
+        return result; ",
+            };
+            lookAndSay.Examples.Add("Input: \"1\"\nOutput: \"1\"");
+            lookAndSay.Examples.Add("Input: \"2\"\nOutput: \"11\"");
+            lookAndSay.Examples.Add("Input: \"3\"\nOutput: \"21\"");
+            lookAndSay.Examples.Add("Input: \"4\"\nOutput: \"1211\"");
+            lookAndSay.TestCases.Add(new TestCase { Input = "1", ExpectedOutput = "1" });
+            lookAndSay.TestCases.Add(new TestCase { Input = "2", ExpectedOutput = "11" });
+            lookAndSay.TestCases.Add(new TestCase { Input = "3", ExpectedOutput = "21" });
+            lookAndSay.TestCases.Add(new TestCase { Input = "4", ExpectedOutput = "1211" });
+            lookAndSay.TestCases.Add(new TestCase { Input = "5", ExpectedOutput = "111221" });
+            lookAndSay.TestCases.Add(new TestCase { Input = "6", ExpectedOutput = "312211" });
+            _problems.Add(lookAndSay);
         }
 
         private void ProblemSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -275,7 +376,7 @@ return answer;";
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             // Display the constraints
-            MessageBox.Show("Here are the constraints:\n\n1. The input is a single string or a list of strings separated by comma.\n2. The answer should be returned in the last line of the code.\n3. For multi-input problems, inputs will be separated by a comma.\n4. You can't use certain namespaces, like System.Linq, in this code editor.", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Here are the constraints:\n\n1. The input is a single string or a list of strings separated by comma.\n2. The answer should be returned in the last line of the code.\n3. For multi-input problems, inputs will be separated by a comma.\n4. You can't use certain namespaces, like System.Linq, in this code editor.\n\nContacts: freelcove@gmail.com", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SolutionButton_Click(object sender, RoutedEventArgs e)
